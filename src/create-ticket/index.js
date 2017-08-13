@@ -3,13 +3,21 @@ import './styles.css';
 
 const CreateTicket = () => {
   return (
-    <div className="App">
-      <div className="App-header">
+    <div className="create-ticket">
+      <div>
         <h2>Ticketer!</h2>
       </div>
-      <p className="App-intro">
-        something great will be here!
-      </p>
+      <form className="create-ticket__form">
+        <label>
+          Ticket subject:
+          <input type='text' />
+        </label>
+
+        <label>
+          Issue description:
+          <textarea type='text' className="materialize-textarea"/>
+        </label>
+      </form>
     </div>
   );
 }
