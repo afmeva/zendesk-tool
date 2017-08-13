@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './create-ticket/App';
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import Routes from './routes';
+
+import './index.css';
+
+ReactDOM.render((
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>
+), document.getElementById('root'))
