@@ -5,15 +5,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
+import rootReducer from './reducers';
 import Routes from './routes';
 
 import './index.css';
 
-// const store = createStore(reducer)
-const store = createStore(() => {})
+const store = createStore(rootReducer)
 
 ReactDOM.render((
-  <Provider>
+  <Provider store={store}>
     <BrowserRouter>
       <Routes />
     </BrowserRouter>
