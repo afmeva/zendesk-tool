@@ -2,7 +2,7 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 
 const server = new Hapi.Server();
-server.connection({ port: 3001, host: 'localhost' });
+server.connection({ port: parseInt(process.env.PORT) || 3001});
 
 server.start((err) => {
 
