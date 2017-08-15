@@ -19,7 +19,7 @@ server.route({
     path: '/{param*}',
     handler: {
         directory: {
-            path: './client/build',
+            path: 'client/build',
             redirectToSlash: true,
             index: true
         }
