@@ -5,7 +5,6 @@ const server = new Hapi.Server();
 server.connection({ port: parseInt(process.env.PORT) || 3001});
 
 server.start((err) => {
-
     if (err) {
         throw err;
     }
