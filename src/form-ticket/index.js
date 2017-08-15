@@ -15,10 +15,10 @@ const validate = values => {
 }
 
 const renderField = (Tag, { input, label, type, className, meta: { touched, error } }) => (
-  <div>
+  <div className='form-group'>
     <label>{label}</label>
     <div>
-      <Tag {...input} placeholder={label} type={type} className={className}/>
+      <Tag {...input} placeholder={label} type={type} className='form-control'/>
       {touched && error ? error: ''}
     </div>
   </div>
@@ -26,19 +26,19 @@ const renderField = (Tag, { input, label, type, className, meta: { touched, erro
 
 let FormTicket = (props) => {
   const {handleSubmit} = props
-  
+
   return (
     <form className='create-ticket__form' onSubmit={handleSubmit}>
       <label>
         Ticket subject:
-        <Field id='subject' name='subject' component={renderField.bind(null, 'input')} type='text'/>
+        <Field id='subject' name='subject' component={renderField.bind(null, 'input')} type='text' />
       </label>
       <label>
         Issue description:
-        <Field name='description' component={renderField.bind(null, 'textarea')} type='text' className='materialize-textarea' />
+        <Field name='description' component={renderField.bind(null, 'textarea')} type='text' />
       </label>
 
-       <button type='submit'>Submit</button>
+       <button type='submit' className="btn btn-default">Submit</button>
     </form>
   );
 }

@@ -6,7 +6,6 @@ import './styles.css';
 
 let CreateTicket = (props) => {
   const handleSubmit = e => {
-    // e.preventDefault()
     console.log(e);
   }
   return (
