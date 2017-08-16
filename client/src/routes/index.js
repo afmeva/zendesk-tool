@@ -5,11 +5,11 @@ import CreateTicket from '../pages/create-ticket';
 import Login from '../pages/login';
 import NotFound from '../pages/not-found';
 
+
 const Routes = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={Login}/>
-      <Route path='/create-ticket' component={CreateTicket}/>
+      <Route path='/' component={CreateTicket}/>
       <Route path='*' component={NotFound}/>
     </Switch>
   </main>

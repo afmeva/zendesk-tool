@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 const validate = values => {
@@ -33,7 +33,7 @@ let FormTicket = (props) => {
       <Field tag="textarea" label="Issue description:" name='description' component={renderField} />
 
       <button type='submit' className="btn btn-default" disabled={isSubmitting}>Submit</button>
-      
+
       {ticketCreatedFailure ? <span>Somenthin went wrong...</span>: ''}
       {ticketCreatedSuccess ? <span>Ticket was created</span>: ''}
     </form>

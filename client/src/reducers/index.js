@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux'
 import { reducer as form } from 'redux-form'
 
-import { CREATE_TICKET, CREATE_TICKET_FAILURE, CREATE_TICKET_SUBMITED } from '../actions'
+import {
+  AUTHENTICATED,
+  UNAUTHENTICATED,
+  CREATE_TICKET,
+  CREATE_TICKET_FAILURE,
+  CREATE_TICKET_SUBMITED } from '../actions'
 
 
 
@@ -22,9 +27,23 @@ const formTicket = (state = formTicketInitial, action) => {
   return state
 }
 
+const authenticationInitial = {
+  isAuthenticated: false,
+}
+const authentication = ( state = authenticationInitial, action) => {
+  switch(action.type) {
+    case AUTHENTICATED:
+      return { ...state, isAuthenticated: true }
+    case UNAUTHENTICATED:
+      return { ...state, isAuthenticated: false }
+  }
+  return state
+}
+
 const rootReducer = combineReducers({
   form,
-  formTicket
+  formTicket,
+  authentication
 })
 
 export default rootReducer
