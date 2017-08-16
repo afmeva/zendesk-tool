@@ -26,13 +26,16 @@ const renderField = ({ tag, input, label, type, className, meta: { touched, erro
 }
 
 let FormTicket = (props) => {
-  const {handleSubmit} = props
-
+  const { handleSubmit, onSubmit, ticketCreatedSuccess, ticketCreatedFailure, isSubmitting} = props
   return (
-    <form className='create-ticket__form' onSubmit={handleSubmit}>
+    <form className='create-ticket__form' onSubmit={handleSubmit(onSubmit)}>
       <Field tag="input" label="Ticket subject:" id='subject' name='subject' component={renderField} type='text' />
       <Field tag="textarea" label="Issue description:" name='description' component={renderField} />
-      <button type='submit' className="btn btn-default">Submit</button>
+
+      <button type='submit' className="btn btn-default" disabled={isSubmitting}>Submit</button>
+      
+      {ticketCreatedFailure ? <span>Somenthin went wrong...</span>: ''}
+      {ticketCreatedSuccess ? <span>Ticket was created</span>: ''}
     </form>
   );
 }

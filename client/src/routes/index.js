@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
 
-import CreateTicket from '../create-ticket';
-import Login from '../login';
-import NotFound from '../not-found';
+import CreateTicket from '../pages/create-ticket';
+import Login from '../pages/login';
+import NotFound from '../pages/not-found';
 
 const Routes = () => (
   <main>

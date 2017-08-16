@@ -4,15 +4,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 // redux
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
 import { Provider } from 'react-redux'
+import reduxThunk from 'redux-thunk'
 
 import rootReducer from './reducers';
 import Routes from './routes';
 
 import './index.css';
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(reduxThunk))
 
 ReactDOM.render((
   <Provider store={store}>
