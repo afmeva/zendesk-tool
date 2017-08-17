@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import FormContainer from '../../containers/formContainer'
-import { checkLogin } from '../../actions'
+import FormContainer from '../containers/formContainer'
+import { checkLogin } from '../actions'
 
 import './styles.css';
 

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
 import rootReducer from './reducers';
-import Routes from './routes';
+import CreateTicket from './create-ticket';
 
 import './index.css';
 
@@ -17,8 +17,6 @@ const store = createStore(rootReducer, applyMiddleware(reduxThunk))
 
 ReactDOM.render((
   <Provider store={store}>
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <CreateTicket />
   </Provider>
 ), document.getElementById('root'))
