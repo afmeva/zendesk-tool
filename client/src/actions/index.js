@@ -16,12 +16,14 @@ const ticketResponse = (type, json) => {
 }
 export function createTicket(props) {
   return dispatch => {
-    let { subject, description } = props
+    const { subject, description } = props
+    const name = localStorage.getItem('name')
+    const email = localStorage.getItem('email')
 
     dispatch({ type: CREATE_TICKET_SUBMITED })
     return fetch('/api/ticket', {
       method: 'POST',
-      body: JSON.stringify({ subject, description }),
+      body: JSON.stringify({ name, email, subject, description }),
       headers: {
         'content-type': 'application/json',
       }
@@ -38,18 +40,19 @@ const auth = new auth0.WebAuth({
     redirectUri: `${window.location.href}`,
     audience: 'https://afmeva.auth0.com/userinfo',
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile email'
   });
 
 
 function setSession(authResult) {
+  localStorage.setItem('name', authResult.idTokenPayload.name)
+  localStorage.setItem('email', authResult.idTokenPayload.email)
+  localStorage.setItem('access_token', authResult.accessToken)
+  localStorage.setItem('id_token', authResult.idToken)
 
-   localStorage.setItem('access_token', authResult.accessToken)
-   localStorage.setItem('id_token', authResult.idToken)
-
-   let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-   localStorage.setItem('expires_at', expiresAt)
- }
+  let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+  localStorage.setItem('expires_at', expiresAt)
+}
 
 function isAuthenticated() {
   let expiresAt = JSON.parse(localStorage.getItem('expires_at'))

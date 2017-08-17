@@ -32,14 +32,18 @@ server.route( {
     path: '/api/ticket',
     method: 'POST',
     handler: ( request, reply ) => {
-      let { subject, description } = request.payload
+      let { subject, description, name, email } = request.payload
 
       fetch('https://test271.zendesk.com/api/v2/tickets.json', {
         method: 'POST',
         body: JSON.stringify({
           ticket: {
             subject: subject,
-            comment:  { body: description }
+            comment:  { body: description },
+            requester: {
+              name,
+              email
+            }
           }
         }),
         headers: {
