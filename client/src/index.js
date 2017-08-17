@@ -1,4 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+import '@auth0/styleguide-core/build/core.min.css'
+import '@auth0/styleguide-components/build/components.min.css'
 
 import React from 'react';
 import ReactDOM from 'react-dom';

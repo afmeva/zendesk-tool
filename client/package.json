@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@auth0/styleguide-components": "^2.0.2",
+    "@auth0/styleguide-core": "^2.0.6",
     "auth0-js": "^8.9.1",
     "bootstrap": "^3.3.7",
     "react": "^15.6.1",

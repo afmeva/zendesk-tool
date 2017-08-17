@@ -14,12 +14,12 @@ class CreateTicket extends Component {
   render() {
     const { isAuthenticated } = this.props
     if(isAuthenticated) {
-      return (<div className="create-ticket">
-        <div>
-          <h2>Ticketer!</h2>
+      return (
+        <div className="col-xs-12">
+          <h2 className="text-center">Ticketer!</h2>
+          <FormContainer />
         </div>
-        <FormContainer />
-      </div>)
+      )
     }
     return <span>redirecting to auth0</span>
   }
