@@ -26,6 +26,7 @@ export function createTicket(props) {
       body: JSON.stringify({ name, email, subject, description }),
       headers: {
         'content-type': 'application/json',
+        'Authorization': localStorage.getItem('access_token')
       }
     })
     .then(response => response.json())
@@ -35,13 +36,13 @@ export function createTicket(props) {
 }
 
 const auth = new auth0.WebAuth({
-    domain: 'afmeva.auth0.com',
-    clientID: 'P2WVQwd43ryGxAM4LWWzes1eZhPOm7lt',
-    redirectUri: `${window.location.href}`,
-    audience: 'https://afmeva.auth0.com/userinfo',
-    responseType: 'token id_token',
-    scope: 'openid profile email'
-  });
+  domain: 'afmeva.auth0.com',
+  clientID: 'P2WVQwd43ryGxAM4LWWzes1eZhPOm7lt',
+  redirectUri: `${window.location.href}`,
+  audience: 'http://localhost:3000/api/ticket',
+  responseType: 'token id_token',
+  scope: 'openid profile email'
+});
 
 
 function setSession(authResult) {
