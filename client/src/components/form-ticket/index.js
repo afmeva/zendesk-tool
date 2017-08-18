@@ -1,14 +1,27 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+import './index.css'
+
+const isEmpty = (value) => {
+  return (value === undefined || value === '')
+}
 const validate = values => {
   const errors = {}
-  if (values.subject === undefined || values.subject === '') {
+  if (isEmpty(values.subject)) {
     errors.subject = 'Required'
   }
 
-  if (values.description === undefined || values.description === '') {
+  if (isEmpty(values.description)) {
     errors.description = 'Required'
+  }
+
+  if (isEmpty(values.costumer_name)) {
+    errors.costumer_name = 'Required'
+  }
+
+  if (isEmpty(values.costumer_email)) {
+    errors.costumer_email = 'Required'
   }
 
   return errors
@@ -52,9 +65,17 @@ let FormTicket = (props) => {
         </div>
       </div>: ''}
 
-      <Field tag="input" label="Ticket subject:" id='subject' name='subject' component={renderField} type='text' />
+      <h2 className="form-ticket__title">Costumer information:</h2>
+      <Field tag="input" label="Costumer name:" name='costumer_name' component={renderField} type='text' />
+      <Field tag="input" label="Costumer email:" name='costumer_email' component={renderField} type='email' />
+
+      <h2 className="form-ticket__title">Issue information:</h2>
+      <Field tag="input" label="Ticket subject:" name='subject' component={renderField} type='text' />
       <Field tag="textarea" label="Issue description:" name='description' component={renderField} />
-      <button type='submit' className="btn btn-default center-block" disabled={isSubmitting}>Submit</button>
+
+      <div className="col-xs-12 text-center">
+        <button type='submit' className="btn btn-default" disabled={isSubmitting}>Submit</button>
+      </div>
     </form>
   );
 }

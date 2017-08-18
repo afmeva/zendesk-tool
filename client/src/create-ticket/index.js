@@ -15,7 +15,7 @@ class CreateTicket extends Component {
     const { isAuthenticated } = this.props
     if(isAuthenticated) {
       return (
-        <div className="col-xs-12">
+        <div className="container">
           <h2 className="text-center">Ticketer!</h2>
           <FormContainer />
         </div>

@@ -16,14 +16,21 @@ const ticketResponse = (type, json) => {
 }
 export function createTicket(props) {
   return dispatch => {
-    const { subject, description } = props
-    const name = localStorage.getItem('name')
-    const email = localStorage.getItem('email')
+    const { subject, description, costumer_name, costumer_email } = props
+    const submitter_name = localStorage.getItem('name')
+    const submitter_email = localStorage.getItem('email')
 
     dispatch({ type: CREATE_TICKET_SUBMITED })
     return fetch('/api/ticket', {
       method: 'POST',
-      body: JSON.stringify({ name, email, subject, description }),
+      body: JSON.stringify({
+        costumer_name,
+        costumer_email,
+        submitter_name,
+        submitter_email,
+        subject,
+        description
+      }),
       headers: {
         'content-type': 'application/json',
         'Authorization': localStorage.getItem('access_token')
