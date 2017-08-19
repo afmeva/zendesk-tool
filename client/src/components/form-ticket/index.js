@@ -50,34 +50,36 @@ const renderField = ({ tag, input, label, type, className, meta: { touched, erro
 let FormTicket = (props) => {
   const { handleSubmit, onSubmit, ticketCreatedSuccess, ticketCreatedFailure, isSubmitting} = props
   return (
-    <form className='form-horizontal col-xs-12' onSubmit={handleSubmit(onSubmit)}>
-    {ticketCreatedFailure ?
-      <div className="auth0-notification-global danger">
-        <div className="container"><i className="notification-icon icon-budicon-354"></i>
-          <p>well... Something was wrong.</p>
+    <div className='row'>
+      <form className='form-horizontal col-xs-12' onSubmit={handleSubmit(onSubmit)}>
+        {ticketCreatedFailure ?
+          <div className="auth0-notification-global danger">
+            <div className="container"><i className="notification-icon icon-budicon-354"></i>
+              <p>well... Something was wrong.</p>
+            </div>
+          </div>: ''}
+
+        {ticketCreatedSuccess ?
+          <div className="auth0-notification-global primary">
+            <div className="container"><i className="notification-icon icon-budicon-764"></i>
+              <p>yes!! Ticket was created.</p>
+            </div>
+          </div>: ''}
+
+        <h2 className="form-ticket__title">Costumer information:</h2>
+        <Field tag="input" label="Costumer name:" name='costumer_name' component={renderField} type='text' />
+        <Field tag="input" label="Costumer email:" name='costumer_email' component={renderField} type='email' />
+
+        <h2 className="form-ticket__title">Issue information:</h2>
+        <Field tag="input" label="Ticket subject:" name='subject' component={renderField} type='text' />
+        <Field tag="textarea" label="Issue description:" name='description' component={renderField} />
+
+        <div className="col-xs-12 text-center">
+          <button type='submit' className="btn btn-primary" disabled={isSubmitting}>Submit</button>
         </div>
-      </div>: ''}
-
-    {ticketCreatedSuccess ?
-      <div className="auth0-notification-global primary">
-        <div className="container"><i className="notification-icon icon-budicon-764"></i>
-          <p>yes!! Ticket was created.</p>
-        </div>
-      </div>: ''}
-
-      <h2 className="form-ticket__title">Costumer information:</h2>
-      <Field tag="input" label="Costumer name:" name='costumer_name' component={renderField} type='text' />
-      <Field tag="input" label="Costumer email:" name='costumer_email' component={renderField} type='email' />
-
-      <h2 className="form-ticket__title">Issue information:</h2>
-      <Field tag="input" label="Ticket subject:" name='subject' component={renderField} type='text' />
-      <Field tag="textarea" label="Issue description:" name='description' component={renderField} />
-
-      <div className="col-xs-12 text-center">
-        <button type='submit' className="btn btn-default" disabled={isSubmitting}>Submit</button>
-      </div>
-    </form>
-  );
+      </form>
+    </div>
+  )
 }
 
 FormTicket = reduxForm({
@@ -85,4 +87,4 @@ FormTicket = reduxForm({
   validate
 })(FormTicket)
 
-export default FormTicket;
+export default FormTicket

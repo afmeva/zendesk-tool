@@ -2,19 +2,19 @@ export const CREATE_TICKET = 'CREATE_TICKET'
 export const CREATE_TICKET_FAILURE = 'CREATE_TICKET_FAILURE'
 export const CREATE_TICKET_SUBMITED = 'CREATE_TICKET_SUBMITED'
 
-const createTicketSuccess = (json) => ({
+const createTicketSuccess = (payload) => ({
   type: CREATE_TICKET,
-  payload: json
+  payload,
 })
 
-const createTicketFailure = (json) => ({
+const createTicketFailure = (payload) => ({
   type: CREATE_TICKET_FAILURE,
-  payload: json
+  payload,
 })
 
-const createTicketSubmitted = (json) => ({
+const createTicketSubmitted = (payload) => ({
   type: CREATE_TICKET_SUBMITED,
-  payload: json
+  payload,
 })
 
 export function createTicket(values) {

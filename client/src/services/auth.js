@@ -9,14 +9,14 @@ class Auth {
     responseType: 'token id_token',
     scope: 'openid profile email'
   })
-  
+
    setSession(authResult) {
     localStorage.setItem('name', authResult.idTokenPayload.name)
     localStorage.setItem('email', authResult.idTokenPayload.email)
     localStorage.setItem('access_token', authResult.accessToken)
     localStorage.setItem('id_token', authResult.idToken)
 
-    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
     localStorage.setItem('expires_at', expiresAt)
   }
 
@@ -28,7 +28,7 @@ class Auth {
   parseResult(callback) {
     this.auth.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
+        this.setSession(authResult)
         callback()
         return
       }

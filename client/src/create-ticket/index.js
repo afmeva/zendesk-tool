@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import './index.css'
 
 import { checkLogin, createTicket } from '../actions'
 import Form from '../components/form-ticket'
@@ -14,13 +16,19 @@ class CreateTicket extends Component {
     const { isAuthenticated, onSubmit } = this.props
     if(isAuthenticated) {
       return (
-        <div className="container">
-          <h2 className="text-center">Ticketer!</h2>
+        <div className='container create-ticket-app'>
+          <div className="page-header">
+            <h1>Ticketer</h1>
+          </div>
           <Form { ...this.props.formTicket } onSubmit={ onSubmit }/>
         </div>
       )
     }
-    return <span>redirecting to auth0</span>
+    return (
+      <div className='create-ticket-loader spinner spinner-lg is-auth0'>
+        <div className='circle'></div>
+      </div>
+    )
   }
 }
 
@@ -41,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateTicket);
+)(CreateTicket)
