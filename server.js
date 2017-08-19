@@ -5,6 +5,10 @@ const Inert = require('inert')
 const btoa = require('btoa')
 const hapiJwt = require('hapi-auth-jwt2')
 
+const ZENDESK_DOMAIN = 'zendesk-tool'
+const ZENDESK_USER = 'afmeva@gmail.com'
+const ZENDESK_API_TOKEN = 'gvkDavE1oEhomexv8vUqGwsWxOmEedV6FlKmTYhj'
+
 const server = new Hapi.Server()
 server.connection({ port: parseInt(process.env.PORT) || 3001})
 
@@ -29,7 +33,6 @@ server.route({
     }
 })
 server.register(hapiJwt, (err) => {
-
   server.auth.strategy('jwt', 'jwt', {
     key: 'XG0hsiT2hmgLr2xNlv3yedpoSmPP2uu3',
     validateFunc: (decode, request, callback) => {
@@ -41,49 +44,50 @@ server.register(hapiJwt, (err) => {
   })
 
   server.route( {
-      path: '/api/ticket',
-      method: 'POST',
-      config: {
-        auth: {
-          strategy: 'jwt'
-        }
-      },
-      handler: ( request, reply ) => {
-        let {
-          subject,
-          description,
-          submitter_name,
-          submitter_email,
-          costumer_name,
-          costumer_email} = request.payload
-
-        fetch('https://test271.zendesk.com/api/v2/users/create_or_update.json', {
-          method: 'POST',
-          body: JSON.stringify({
-            user: {
-              name: submitter_name, 
-              email: submitter_email,
-              role: 'agent'
-            }
-          }),
-          headers: {
-            'content-type': 'application/json',
-            'Authorization': `Basic ${btoa('afmeva@gmail.com/token:Q0x34dNrOWnfr57RIPR75oedumaLIuwzV9yGKkLg')}`
-          }
-        })
-        .then(response => response.json())
-        .then(({user}) => {
-            createTicket(user.id, costumer_name, costumer_email, subject, description, reply)
-        })
-        .catch(console.error) // erros should be handled
-
+    path: '/api/ticket',
+    method: 'POST',
+    config: {
+      auth: {
+        strategy: 'jwt'
       }
-  } )
+    },
+    handler: createUser
+  })
 })
 
 
+function createUser(request, reply) {
+  let {
+      subject,
+      description,
+      submitter_name,
+      submitter_email,
+      costumer_name,
+      costumer_email } = request.payload
+
+  fetch(`https://${ZENDESK_DOMAIN}.zendesk.com/api/v2/users/create_or_update.json`, {
+    method: 'POST',
+    body: JSON.stringify({
+      user: {
+        name: submitter_name,
+        email: submitter_email,
+        role: 'agent'
+      }
+    }),
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Basic ${btoa(`${ZENDESK_USER}/token:${ZENDESK_API_TOKEN}`)}`
+    }
+  })
+  .then(response => response.json())
+  .then(({user}) => {
+    createTicket(user.id, costumer_name, costumer_email, subject, description, reply)
+  })
+  .catch(console.error) // erros should be handled}
+}
+
 function createTicket(submitterId, name, email, subject, description, callback) {
-  fetch('https://test271.zendesk.com/api/v2/tickets.json', {
+  fetch(`https://${ZENDESK_DOMAIN}.zendesk.com/api/v2/tickets.json`, {
     method: 'POST',
     body: JSON.stringify({
       ticket: {
@@ -99,7 +103,7 @@ function createTicket(submitterId, name, email, subject, description, callback) 
     }),
     headers: {
       'content-type': 'application/json',
-      'Authorization': `Basic ${btoa('afmeva@gmail.com/token:Q0x34dNrOWnfr57RIPR75oedumaLIuwzV9yGKkLg')}`
+      'Authorization': `Basic ${btoa(`${ZENDESK_USER}/token:${ZENDESK_API_TOKEN}`)}`
     }
   })
   .then(response => response.json())

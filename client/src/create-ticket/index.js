@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import FormContainer from '../containers/formContainer'
-import { checkLogin } from '../actions'
-
-import './styles.css';
+import { checkLogin, createTicket } from '../actions'
+import Form from '../components/form-ticket'
 
 class CreateTicket extends Component {
   componentDidMount() {
@@ -12,12 +11,12 @@ class CreateTicket extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props
+    const { isAuthenticated, onSubmit } = this.props
     if(isAuthenticated) {
       return (
         <div className="container">
           <h2 className="text-center">Ticketer!</h2>
-          <FormContainer />
+          <Form { ...this.props.formTicket } onSubmit={ onSubmit }/>
         </div>
       )
     }
@@ -25,18 +24,18 @@ class CreateTicket extends Component {
   }
 }
 
-const mapStateToProps = ( {authentication} ) => {
+const mapStateToProps = ( { authentication, formTicket } ) => {
   return {
-    isAuthenticated: authentication.isAuthenticated
+    isAuthenticated: authentication.isAuthenticated,
+    formTicket
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    checkLogin: (value) => {
-      dispatch(checkLogin(value))
-    }
-  }
+  return bindActionCreators({
+    checkLogin,
+    onSubmit: createTicket
+  }, dispatch)
 }
 
 export default connect(

@@ -3,7 +3,6 @@ import '@auth0/styleguide-components/build/components.min.css'
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
 // redux
 import { createStore, applyMiddleware  } from 'redux'
 import { Provider } from 'react-redux'
