@@ -7,6 +7,7 @@ export default ( state = authenticationInitial, action ) => {
   switch(action.type) {
     case AUTHENTICATED:
       return { ...state, isAuthenticated: true }
+    default:
+      return state
   }
-  return state
 }

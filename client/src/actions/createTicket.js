@@ -1,3 +1,5 @@
+import { reset } from 'redux-form';
+
 export const CREATE_TICKET = 'CREATE_TICKET'
 export const CREATE_TICKET_FAILURE = 'CREATE_TICKET_FAILURE'
 export const CREATE_TICKET_SUBMITED = 'CREATE_TICKET_SUBMITED'
@@ -46,6 +48,7 @@ export function createTicket(values) {
         dispatch(createTicketFailure(json))
         return
       }
+      dispatch(reset('ticket'))
       dispatch(createTicketSuccess(json))
     })
     .catch(json => dispatch(createTicketFailure(json)))

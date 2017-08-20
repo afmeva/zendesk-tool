@@ -17,6 +17,7 @@ export default ( state = formTicketInitial, action ) => {
       return { ...state, ticketCreatedSuccess: true, isSubmitting: false }
     case CREATE_TICKET_FAILURE:
       return { ...state, ticketCreatedFailure: true, isSubmitting: false }
+    default:
+      return state
   }
-  return state
 }

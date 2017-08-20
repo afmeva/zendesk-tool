@@ -27,19 +27,20 @@ const validate = values => {
   return errors
 }
 
-const renderField = ({ tag, input, label, type, className, meta: { touched, error } }) => {
+const renderField = ({ tag, input, label, type, autoFocus, meta: { touched, error } }) => {
   let Component = tag
   return (
-    <div className="form-group">
-      <label className="col-xs-3 control-label">{label}</label>
-      <div className="col-xs-9">
+    <div className='form-group'>
+      <label className='col-xs-3 control-label'>{label}</label>
+      <div className='col-xs-9'>
         <Component {...input} placeholder={label}
           type={type}
+          autoFocus={autoFocus}
           className={`form-control ${touched && error?'has-error':''} ${touched && !error?'has-success':''}`}
         />
 
         {touched && error ?
-          <div className="alert alert-danger">
+          <div className='alert alert-danger'>
             <strong>jmm!</strong> This field is required!
           </div>: ''}
       </div>
@@ -53,29 +54,29 @@ let FormTicket = (props) => {
     <div className='row'>
       <form className='form-horizontal col-xs-12' onSubmit={handleSubmit(onSubmit)}>
         {ticketCreatedFailure ?
-          <div className="auth0-notification-global danger">
-            <div className="container"><i className="notification-icon icon-budicon-354"></i>
+          <div className='auth0-notification-global danger'>
+            <div className='container'><i className='notification-icon icon-budicon-354'></i>
               <p>well... Something was wrong.</p>
             </div>
           </div>: ''}
 
         {ticketCreatedSuccess ?
-          <div className="auth0-notification-global primary">
-            <div className="container"><i className="notification-icon icon-budicon-764"></i>
+          <div className='auth0-notification-global primary'>
+            <div className='container'><i className='notification-icon icon-budicon-764'></i>
               <p>yes!! Ticket was created.</p>
             </div>
           </div>: ''}
 
-        <h2 className="form-ticket__title">Costumer information:</h2>
-        <Field tag="input" label="Costumer name:" name='costumer_name' component={renderField} type='text' />
-        <Field tag="input" label="Costumer email:" name='costumer_email' component={renderField} type='email' />
+        <h2 className='form-ticket__title'>Costumer information:</h2>
+        <Field tag='input' label='Costumer name:' name='costumer_name' component={renderField} type='text' autoFocus='true'/>
+        <Field tag='input' label='Costumer email:' name='costumer_email' component={renderField} type='email' />
 
-        <h2 className="form-ticket__title">Issue information:</h2>
-        <Field tag="input" label="Ticket subject:" name='subject' component={renderField} type='text' />
-        <Field tag="textarea" label="Issue description:" name='description' component={renderField} />
+        <h2 className='form-ticket__title'>Issue information:</h2>
+        <Field tag='input' label='Ticket subject:' name='subject' component={renderField} type='text' />
+        <Field tag='textarea' label='Issue description:' name='description' component={renderField} />
 
-        <div className="col-xs-12 text-center">
-          <button type='submit' className="btn btn-primary" disabled={isSubmitting}>Submit</button>
+        <div className='col-xs-12 text-center'>
+          <button type='submit' className='btn btn-primary' disabled={isSubmitting}>Submit</button>
         </div>
       </form>
     </div>
