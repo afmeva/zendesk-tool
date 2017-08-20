@@ -27,7 +27,7 @@ const validate = values => {
   return errors
 }
 
-const renderField = ({ tag, input, label, type, autoFocus, meta: { touched, error } }) => {
+const renderField = ({ tag, input, label, type, meta: { touched, error } }) => {
   let Component = tag
   return (
     <div className='form-group'>
@@ -35,7 +35,6 @@ const renderField = ({ tag, input, label, type, autoFocus, meta: { touched, erro
       <div className='col-xs-9'>
         <Component {...input} placeholder={label}
           type={type}
-          autoFocus={autoFocus}
           className={`form-control ${touched && error?'has-error':''} ${touched && !error?'has-success':''}`}
         />
 
@@ -68,7 +67,7 @@ let FormTicket = (props) => {
           </div>: ''}
 
         <h2 className='form-ticket__title'>Costumer information:</h2>
-        <Field tag='input' label='Costumer name:' name='costumer_name' component={renderField} type='text' autoFocus='true'/>
+        <Field tag='input' label='Costumer name:' name='costumer_name' component={renderField} type='text' />
         <Field tag='input' label='Costumer email:' name='costumer_email' component={renderField} type='email' />
 
         <h2 className='form-ticket__title'>Issue information:</h2>
